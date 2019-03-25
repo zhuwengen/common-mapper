@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+		PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!--生成文件命令: mybatis-generator:generate -->
+<generatorConfiguration>
+	<!-- 系统模块表结构生成 -->
+	<properties resource="mgb-jdbc.properties" />
+	<context id="default" targetRuntime="MyBatis3">
+		<property name="javaFileEncoding" value="UTF-8" />
+
+		<plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+		<plugin type="plugin.XmloverridePluginAdapter"></plugin>
+
+		<commentGenerator type="plugin.MybatisCommentGenerator">
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="false" />
+			<property name="addRemarkComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="${jdbc.driverClass}"
+						connectionURL="${jdbc.url}" userId="${jdbc.userId}" password="${jdbc.password}">
+			<property name="remarks" value="true" />
+			<property name="remarksReporting" value="true" />
+			<property name="useInformationSchema" value="true" />
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- targetProject:生成POJO类的位置 -->
+		<javaModelGenerator targetPackage="com.wengen.model"
+							targetProject="src/main/java">
+			<property name="enableSubPackages" value="false" />
+			<property name="trimStrings" value="false" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="com.wengen.mapper"
+						 targetProject="src/main/java">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+		<javaClientGenerator targetPackage="com.wengen.mapper"
+							 type="XMLMAPPER" targetProject="src/main/java">
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+		<table tableName="store_config" domainObjectName="StoreConfig">
+			<generatedKey column="cofing_id" sqlStatement="SELECT CONCAT(right(UUID_SHORT() , 18)) AS config_id" />
+			<columnOverride column="is_open" javaType="Boolean" />
+		</table>
+
+	</context>
+</generatorConfiguration>
